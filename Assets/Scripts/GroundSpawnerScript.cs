@@ -3,18 +3,25 @@ using UnityEngine;
 
 public class GroundSpawnerScript : MonoBehaviour
 {
-    [SerializeField] GameObject chunckPrefab;
+    List<GameObject> chuncks = new List<GameObject>();
     [SerializeField] CameraSettings cameraSettings;
+    [SerializeField] GameObject chunckPrefab;
     [SerializeField] Transform chunckParent;
-    [SerializeField] float chuncksSpeedMovement = 10f;
     Vector3 pos;
     Transform cameraTransform;
+    [SerializeField] float chuncksSpeedMovement = 10f;
+    [SerializeField] float minchuncksSpeedMovement = 2f;
+    [SerializeField] float maxchuncksSpeedMovement = 35f;
     float groundLenght = 10;
     int groundAmount = 14;
-    List<GameObject> chuncks = new List<GameObject>();
+
+    Vector3 physicsGravity;
+    [SerializeField] float minGravityVelocityZ = -25f;
+    [SerializeField] float maxGravityVelocityZ = -2f;
     void Start()
     {
         pos = transform.position;
+        physicsGravity = Physics.gravity;
         cameraTransform = Camera.main.transform;
 
         chuncks = new List<GameObject>(groundAmount);
@@ -39,13 +46,15 @@ public class GroundSpawnerScript : MonoBehaviour
     }
     public void ChangeSpeedOnCollision(float speed)
     {
-        chuncksSpeedMovement += speed;
-        if(chuncksSpeedMovement <= 0)
-            chuncksSpeedMovement = 2f;
+        chuncksSpeedMovement = Mathf.Clamp(chuncksSpeedMovement + speed, 
+                                            minchuncksSpeedMovement, 
+                                            maxchuncksSpeedMovement); 
 
-        var physics = Physics.gravity; 
-        physics = new Vector3(physics.x, physics.y, physics.z - speed);
-        Physics.gravity = physics;
+        float gravityPhysicsZ = Mathf.Clamp(physicsGravity.z - speed, 
+                                            minGravityVelocityZ, 
+                                            maxGravityVelocityZ);
+        physicsGravity = new Vector3(physicsGravity.x, physicsGravity.y, gravityPhysicsZ);
+        Physics.gravity = physicsGravity;
 
        cameraSettings.CameraZoomChangeFOV(speed);
     }

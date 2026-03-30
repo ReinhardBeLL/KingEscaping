@@ -445,10 +445,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64059bea1840a2c4d96e239f5a25944f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  chunckPrefab: {fileID: 8529664396092166049, guid: cd797e60a584da14cb2205608368325a, type: 3}
   cameraSettings: {fileID: 1583685301}
+  chunckPrefab: {fileID: 8529664396092166049, guid: cd797e60a584da14cb2205608368325a, type: 3}
   chunckParent: {fileID: 575988232}
   chuncksSpeedMovement: 10
+  minchuncksSpeedMovement: 2
+  maxchuncksSpeedMovement: 35
 --- !u!4 &575988232
 Transform:
   m_ObjectHideFlags: 0
