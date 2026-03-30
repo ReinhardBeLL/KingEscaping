@@ -20,6 +20,10 @@ public class GroundSpawnerScript : MonoBehaviour
         chuncks = new List<GameObject>(groundAmount);
         SpawnChuncks();
     }
+    void Update()
+    {
+        ChunckMoving();
+    }
     void SpawnChuncks()
     {
         for (int i = 0; i < groundAmount; i++)
@@ -32,10 +36,6 @@ public class GroundSpawnerScript : MonoBehaviour
            GameObject chunck = Instantiate(chunckPrefab, spawnPos, Quaternion.identity, chunckParent);
            chuncks.Add(chunck);
         }
-    }
-    void Update()
-    {
-        ChunckMoving();
     }
     public void ChangeSpeedOnCollision(float speed)
     {

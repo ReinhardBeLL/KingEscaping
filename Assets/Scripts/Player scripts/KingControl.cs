@@ -7,15 +7,15 @@ public class KingControl : MonoBehaviour
     Playercontrolaction control;
     Rigidbody rb;
     Vector2 inputMove;
-    void OnEnable() => 
-        control.Enable();
-    void OnDisable() => 
-        control.Disable();
     void Awake()
     {
         control = new Playercontrolaction();
         rb = GetComponent<Rigidbody>();
     }
+    void OnEnable() => 
+        control.Enable();
+    void OnDisable() => 
+        control.Disable();
     void FixedUpdate()
     {
         PlayerMovement();
