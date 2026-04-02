@@ -4,38 +4,42 @@ using UnityEngine;
 
 public class CameraSettings : MonoBehaviour
 {
-    [SerializeField] ParticleSystem speedUpParticle;
+    [Header("Camera Settings")]
+    [SerializeField] CinemachineCamera cineCamera;
+    [Tooltip("Controls how fast the FOV changes")]
+    [SerializeField] float cameraZoomChangeSpeed = 15f;
+    [SerializeField] float fovEffectThreshold = 80f;
     [SerializeField] float minFOV = 30f;
     [SerializeField] float maxFOV = 90f;
-    [SerializeField] float cameraZoomChangeSpeed = 15f;
-    [SerializeField] CinemachineCamera cineCamera;
-    Coroutine currentCorutine;
+
+    [Header("Speed Boost Effect")]
+    [Tooltip("When FOV exceeds threshold")]
+    [SerializeField] ParticleSystem speedUpParticle;
+
+    Coroutine currentCoroutine;
+    void Start()
+    {
+        if(speedUpParticle == null || cineCamera == null)
+        {
+            Debug.LogWarning("CameraSettings: SpeedUpParticle or CinemachineCamera is not assigned");
+            enabled = false;
+        }
+    }
     public void CameraZoomChangeFOV(float speed)
     {
-        
-        if(currentCorutine != null)
-        {
-            StopCoroutine(currentCorutine);
-        }
-        currentCorutine = StartCoroutine(CameraFOVdynamicChange(speed));
-    }
-    void Update()
-    {
-        SpeedUpEffect();
+        if(currentCoroutine != null)
+            StopCoroutine(currentCoroutine);
+        currentCoroutine = StartCoroutine(CameraFOVdynamicChange(speed));
     }
     void SpeedUpEffect()
     {
         var emission = speedUpParticle.emission;
         float FOV = cineCamera.Lens.FieldOfView;
 
-        if(FOV > 80f && !emission.enabled)
-        {
+        if(FOV >= fovEffectThreshold && !emission.enabled)
             emission.enabled = true;
-        }
-        else if(FOV < 80f && emission.enabled)
-        {
+        else if(FOV < fovEffectThreshold && emission.enabled)
             emission.enabled = false;
-        }
     }
     IEnumerator CameraFOVdynamicChange(float speed)
     {
@@ -47,9 +51,11 @@ public class CameraSettings : MonoBehaviour
             FOVDuration += Time.deltaTime;
             float t = FOVDuration / 1f;
             cineCamera.Lens.FieldOfView = Mathf.Lerp(currentFOV, targetFOV, t);
+            SpeedUpEffect();
             yield return null;
         }
         cineCamera.Lens.FieldOfView = targetFOV;
-        currentCorutine = null;
+        currentCoroutine = null;
+        
     }
 }

@@ -3,9 +3,11 @@ using UnityEngine;
 
 public class Chunck : MonoBehaviour
 {
+    [Header("Objects prefab")]
     [SerializeField] GameObject barrierPrefab;
     [SerializeField] GameObject applePrefab;
     [SerializeField] GameObject coinPrefab;
+    [Header("Item spawn chance")]
     [SerializeField] float chanceSpawnApple = .4f;
     [SerializeField] float chanceSpawnCoin = .6f;
     float[] barrierLanes = {-4.17f, -1.62f, 1.08f, 3.88f};
