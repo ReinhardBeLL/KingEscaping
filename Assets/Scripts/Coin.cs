@@ -2,8 +2,12 @@ using UnityEngine;
 
 public class Coin : PickUp
 {
+    [SerializeField] int addScoreValue = 100;
+    ScoreManager scoreManager;
+    void Start() => 
+        scoreManager = FindFirstObjectByType<ScoreManager>();
     protected override void OnPickUp()
     {
-        Debug.Log("You take 100$");
+        scoreManager.AddScore(addScoreValue);
     }
 }

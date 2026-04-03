@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GroundSpawnerScript : MonoBehaviour
@@ -41,6 +42,8 @@ public class GroundSpawnerScript : MonoBehaviour
 
            Vector3 spawnPos = new Vector3(pos.x, pos.y, spawningForward);
            GameObject chunck = Instantiate(chunckPrefab, spawnPos, Quaternion.identity, chunckParent);
+           Chunck chunkScript = chunck.GetComponent<Chunck>();
+           chunkScript.Init(this);
            chuncks.Add(chunck);
         }
     }
@@ -82,6 +85,8 @@ public class GroundSpawnerScript : MonoBehaviour
         
         Vector3 spawnChuncks = new Vector3(pos.x, pos.y, chunckSpawnZ);
         GameObject newChunck = Instantiate(chunckPrefab, spawnChuncks, Quaternion.identity, chunckParent);
+        Chunck chunkScript = newChunck.GetComponent<Chunck>();
+        chunkScript.Init(this);
         chuncks.Add(newChunck);
     }
 }

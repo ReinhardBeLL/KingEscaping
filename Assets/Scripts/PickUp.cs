@@ -5,9 +5,9 @@ public abstract class PickUp : MonoBehaviour
     [SerializeField] float rotationSpeed = 100f;
     protected GroundSpawnerScript gScript;
     const string playerString = "Player";
-    void Start()
+    public void Init(GroundSpawnerScript gScript)
     {
-        gScript = FindFirstObjectByType<GroundSpawnerScript>();
+        this.gScript = gScript;
     }
     void Update()
     {

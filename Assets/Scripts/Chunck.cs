@@ -10,6 +10,7 @@ public class Chunck : MonoBehaviour
     [Header("Item spawn chance")]
     [SerializeField] float chanceSpawnApple = .4f;
     [SerializeField] float chanceSpawnCoin = .6f;
+    GroundSpawnerScript gScript;
     float[] barrierLanes = {-4.17f, -1.62f, 1.08f, 3.88f};
     List<int> roadIndex = new List<int> {0, 1, 2, 3};
     float chunckLenght = 5f;
@@ -22,6 +23,10 @@ public class Chunck : MonoBehaviour
         SpawnBarrier();
         SpawnApples();
         SpawnCoins();
+    }
+    public void Init(GroundSpawnerScript gScript)
+    {
+        this.gScript = gScript;
     }
     void SpawnBarrier()
     {
@@ -41,7 +46,9 @@ public class Chunck : MonoBehaviour
         int selectRoad = ChooseLaneToSpawn();
         pos = transform.position;
         Vector3 posSpawn = new Vector3(barrierLanes[selectRoad], 0.4f, pos.z);
-        Instantiate(applePrefab, posSpawn, Quaternion.identity, this.transform);
+        GameObject appleGO = Instantiate(applePrefab, posSpawn, Quaternion.identity, this.transform);
+        PickUp pickUp = appleGO.GetComponent<PickUp>();
+        pickUp.Init(gScript);
     }
     void SpawnCoins()
     {
@@ -54,7 +61,9 @@ public class Chunck : MonoBehaviour
         {
             float spawnBack = topOfZ - (i * seperationChunckLEnght);
             Vector3 posSpawn = new Vector3(barrierLanes[selectRoad], 0.4f, spawnBack);
-            Instantiate(coinPrefab, posSpawn, Quaternion.identity, this.transform);
+            GameObject coinGO = Instantiate(coinPrefab, posSpawn, Quaternion.identity, this.transform);
+            PickUp pickUp = coinGO.GetComponent<PickUp>();
+            pickUp.Init(gScript);
         }
     }
     int ChooseLaneToSpawn()

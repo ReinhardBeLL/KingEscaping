@@ -56,6 +56,5 @@ public class CameraSettings : MonoBehaviour
         }
         cineCamera.Lens.FieldOfView = targetFOV;
         currentCoroutine = null;
-        
     }
 }
