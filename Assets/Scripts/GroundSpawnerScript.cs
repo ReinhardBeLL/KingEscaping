@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class GroundSpawnerScript : MonoBehaviour
 {
-    List<GameObject> chuncks = new List<GameObject>();
+    [Header("Camera announcement")]
     [SerializeField] CameraSettings cameraSettings;
+    [Header("Announcement of chunks")]
     [SerializeField] GameObject chunckPrefab;
     [SerializeField] Transform chunckParent;
-    Vector3 pos;
-    Transform cameraTransform;
     [SerializeField] float chuncksSpeedMovement = 10f;
     [SerializeField] float minchuncksSpeedMovement = 2f;
     [SerializeField] float maxchuncksSpeedMovement = 35f;
-    float groundLenght = 10;
+    List<GameObject> chuncks = new List<GameObject>();
+    float groundLenght = 10f;
     int groundAmount = 14;
-
+    Transform cameraTransform;
     Vector3 physicsGravity;
+    Vector3 pos;
     [SerializeField] float minGravityVelocityZ = -25f;
     [SerializeField] float maxGravityVelocityZ = -2f;
     void Start()
@@ -28,10 +29,8 @@ public class GroundSpawnerScript : MonoBehaviour
         chuncks = new List<GameObject>(groundAmount);
         SpawnChuncks();
     }
-    void Update()
-    {
+    void Update() =>
         ChunckMoving();
-    }
     void SpawnChuncks()
     {
         for (int i = 0; i < groundAmount; i++)
