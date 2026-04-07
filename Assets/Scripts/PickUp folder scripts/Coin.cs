@@ -4,8 +4,8 @@ public class Coin : PickUp
 {
     [SerializeField] int addScoreValue = 100;
     ScoreManager scoreManager;
-    void Start() => 
-        scoreManager = FindFirstObjectByType<ScoreManager>();
+    public void Init(ScoreManager scoreManager) =>
+        this.scoreManager = scoreManager;
     protected override void OnPickUp()
     {
         scoreManager.AddScore(addScoreValue);

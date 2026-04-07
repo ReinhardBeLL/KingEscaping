@@ -3,20 +3,25 @@ using UnityEngine;
 
 public class Chunck : MonoBehaviour
 {
-    [Header("Objects prefab")]
+    [Header("Dependencies")]
     [SerializeField] GameObject barrierPrefab;
     [SerializeField] GameObject applePrefab;
     [SerializeField] GameObject coinPrefab;
-    [Header("Item spawn chance")]
+    GroundSpawnerScript gScript;
+    ScoreManager scoreManager;
+
+    [Header("Tuning")]
     [SerializeField] float chanceSpawnApple = .4f;
     [SerializeField] float chanceSpawnCoin = .6f;
-    GroundSpawnerScript gScript;
+
+    [Header("Runtime")]
     float[] barrierLanes = {-4.17f, -1.62f, 1.08f, 3.88f};
     List<int> roadIndex = new List<int> {0, 1, 2, 3};
+    Vector3 pos;
+    
+    [Header("Internal Config")]
     float chunckLenght = 5f;
     float seperationChunckLEnght = 2f;
-    Vector3 pos;
-
     void Start()
     {
         pos = transform.position;
@@ -24,9 +29,10 @@ public class Chunck : MonoBehaviour
         SpawnApples();
         SpawnCoins();
     }
-    public void Init(GroundSpawnerScript gScript)
+    public void Init(GroundSpawnerScript groundSpawnerScript, ScoreManager scoreManager)
     {
-        this.gScript = gScript;
+        this.gScript = groundSpawnerScript;
+        this.scoreManager = scoreManager;
     }
     void SpawnBarrier()
     {
@@ -62,8 +68,8 @@ public class Chunck : MonoBehaviour
             float spawnBack = topOfZ - (i * seperationChunckLEnght);
             Vector3 posSpawn = new Vector3(barrierLanes[selectRoad], 0.4f, spawnBack);
             GameObject coinGO = Instantiate(coinPrefab, posSpawn, Quaternion.identity, this.transform);
-            PickUp pickUp = coinGO.GetComponent<PickUp>();
-            pickUp.Init(gScript);
+            Coin coinScript = coinGO.GetComponent<Coin>();
+            coinScript.Init(scoreManager);
         }
     }
     int ChooseLaneToSpawn()

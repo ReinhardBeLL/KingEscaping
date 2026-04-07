@@ -1,25 +1,31 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GroundSpawnerScript : MonoBehaviour
 {
-    [Header("Camera announcement")]
+    [Header("Dependencies")]
     [SerializeField] CameraSettings cameraSettings;
-    [Header("Announcement of chunks")]
     [SerializeField] GameObject chunckPrefab;
+    [SerializeField] ScoreManager scoreManager;
     [SerializeField] Transform chunckParent;
+
+
+    [Header("Tuning")]
     [SerializeField] float chuncksSpeedMovement = 10f;
     [SerializeField] float minchuncksSpeedMovement = 2f;
     [SerializeField] float maxchuncksSpeedMovement = 35f;
-    List<GameObject> chuncks = new List<GameObject>();
-    float groundLenght = 10f;
-    int groundAmount = 14;
+    [SerializeField] float minGravityVelocityZ = -25f;
+    [SerializeField] float maxGravityVelocityZ = -2f;
+    
+    [Header("Runtime")]
     Transform cameraTransform;
     Vector3 physicsGravity;
     Vector3 pos;
-    [SerializeField] float minGravityVelocityZ = -25f;
-    [SerializeField] float maxGravityVelocityZ = -2f;
+    List<GameObject> chuncks = new List<GameObject>();
+
+    
+    float groundLenght = 10f;
+    int groundAmount = 14;
     void Start()
     {
         pos = transform.position;
@@ -42,7 +48,7 @@ public class GroundSpawnerScript : MonoBehaviour
            Vector3 spawnPos = new Vector3(pos.x, pos.y, spawningForward);
            GameObject chunck = Instantiate(chunckPrefab, spawnPos, Quaternion.identity, chunckParent);
            Chunck chunkScript = chunck.GetComponent<Chunck>();
-           chunkScript.Init(this);
+           chunkScript.Init(this, scoreManager);
            chuncks.Add(chunck);
         }
     }
@@ -85,7 +91,7 @@ public class GroundSpawnerScript : MonoBehaviour
         Vector3 spawnChuncks = new Vector3(pos.x, pos.y, chunckSpawnZ);
         GameObject newChunck = Instantiate(chunckPrefab, spawnChuncks, Quaternion.identity, chunckParent);
         Chunck chunkScript = newChunck.GetComponent<Chunck>();
-        chunkScript.Init(this);
+        chunkScript.Init(this, scoreManager);
         chuncks.Add(newChunck);
     }
 }
