@@ -4,7 +4,7 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField] TMP_Text scoreBoard;
-    int startScore = 0;
+    int currentScore = 0;
     void Start()
     {
         if(scoreBoard == null)
@@ -13,9 +13,13 @@ public class ScoreManager : MonoBehaviour
             enabled = false;
         }
     }
+    void UpdateScoreUI()
+    {
+        scoreBoard.text = currentScore.ToString();
+    }
     public void AddScore(int score)
     {
-        startScore += score;
-        scoreBoard.text = startScore.ToString();
+        currentScore += score;
+        UpdateScoreUI();
     }
 }
