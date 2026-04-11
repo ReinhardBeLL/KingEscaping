@@ -5,7 +5,8 @@ public class GroundSpawnerScript : MonoBehaviour
 {
     [Header("Dependencies")]
     [SerializeField] CameraSettings cameraSettings;
-    [SerializeField] GameObject chunckPrefab;
+    [SerializeField] GameObject[] chunckPrefab;
+    [SerializeField] GameObject chunckCheckPointPrefab;
     [SerializeField] ScoreManager scoreManager;
     [SerializeField] Transform chunckParent;
 
@@ -21,22 +22,21 @@ public class GroundSpawnerScript : MonoBehaviour
     Transform cameraTransform;
     Vector3 physicsGravity;
     Vector3 pos;
-    List<GameObject> chuncks = new List<GameObject>();
-
-    
+    List<GameObject> chuncks = new List<GameObject>();    
     float groundLenght = 10f;
+    int checkPointValueInterval = 8;
+    int spawningChunckAmount = 0;
     int groundAmount = 14;
     void Start()
     {
         pos = transform.position;
         physicsGravity = Physics.gravity;
         cameraTransform = Camera.main.transform;
-
+        
         chuncks = new List<GameObject>(groundAmount);
         SpawnChuncks();
     }
-    void Update() =>
-        ChunckMoving();
+    void Update() => ChunckMoving();
     void SpawnChuncks()
     {
         for (int i = 0; i < groundAmount; i++)
@@ -46,9 +46,7 @@ public class GroundSpawnerScript : MonoBehaviour
            float spawningForward = pos.z + spawnZ;
 
            Vector3 spawnPos = new Vector3(pos.x, pos.y, spawningForward);
-           GameObject chunck = Instantiate(chunckPrefab, spawnPos, Quaternion.identity, chunckParent);
-           Chunck chunkScript = chunck.GetComponent<Chunck>();
-           chunkScript.Init(this, scoreManager);
+           GameObject chunck = CreateObject(spawnPos);
            chuncks.Add(chunck);
         }
     }
@@ -89,9 +87,25 @@ public class GroundSpawnerScript : MonoBehaviour
         float chunckSpawnZ = lastZ + groundLenght;
         
         Vector3 spawnChuncks = new Vector3(pos.x, pos.y, chunckSpawnZ);
-        GameObject newChunck = Instantiate(chunckPrefab, spawnChuncks, Quaternion.identity, chunckParent);
-        Chunck chunkScript = newChunck.GetComponent<Chunck>();
-        chunkScript.Init(this, scoreManager);
+        GameObject newChunck = CreateObject(spawnChuncks);
         chuncks.Add(newChunck);
+    }
+    GameObject CreateObject(Vector3 pos)
+    {
+        GameObject chunck;
+        if(spawningChunckAmount % checkPointValueInterval == 0)
+        {
+            chunck = Instantiate(chunckCheckPointPrefab, pos, Quaternion.identity, chunckParent);
+        }
+        else
+        {
+            GameObject randomChuncks = chunckPrefab[Random.Range(0, chunckPrefab.Length)];
+            chunck = Instantiate(randomChuncks, pos, Quaternion.identity, chunckParent);
+        }
+        Chunck chunkScript = chunck.GetComponent<Chunck>();
+        chunkScript.Init(this, scoreManager);
+        spawningChunckAmount++;
+
+        return chunck;
     }
 }

@@ -167,6 +167,8 @@ MonoBehaviour:
   timerText: {fileID: 1373137221}
   gameOverText: {fileID: 1066433840}
   kingControl: {fileID: 1619379502}
+  slowMotionValue: 0.1
+  timeDuration: 20
 --- !u!114 &50336288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -644,7 +646,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   cameraSettings: {fileID: 1583685301}
-  chunckPrefab: {fileID: 8529664396092166049, guid: cd797e60a584da14cb2205608368325a, type: 3}
+  chunckPrefab:
+  - {fileID: 8529664396092166049, guid: cd797e60a584da14cb2205608368325a, type: 3}
+  - {fileID: 7732690034159028195, guid: d99f1de3355e5d341ad9dd35e3437ffe, type: 3}
+  - {fileID: 7732690034159028195, guid: 22e87e7e8fde0f149839c9732af166c8, type: 3}
+  - {fileID: 7732690034159028195, guid: cd919e74ef1f069409fa0819628a2214, type: 3}
+  chunckCheckPointPrefab: {fileID: 7732690034159028195, guid: a37dabef5d30ec943b6a8cfac3e13b2a, type: 3}
   scoreManager: {fileID: 50336288}
   chunckParent: {fileID: 575988232}
   chuncksSpeedMovement: 10

@@ -10,6 +10,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] float timeDuration = 5f;
     bool isGameOver = false;
     float currentTime = 0f;
+    public bool GameOver
+    {
+        get {return isGameOver; }
+        private set {isGameOver = value; }
+    }
     void Start()
     {
         if(timerText == null || gameOverText == null || kingControl == null)
@@ -30,13 +35,13 @@ public class GameManager : MonoBehaviour
         currentTime = Mathf.Clamp(currentTime, 0f, timeDuration);
         UpdateTextUI();
         if(currentTime <= 0f)
-            GameOver();
+            PlayGameOver();
     }
     void UpdateTextUI()
     {
         timerText.text = Mathf.Max(currentTime, 0f).ToString();
     }
-    void GameOver()
+    void PlayGameOver()
     {
         if(isGameOver) return;
         Time.timeScale = slowMotionValue;
