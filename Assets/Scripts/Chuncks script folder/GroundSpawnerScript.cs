@@ -12,6 +12,7 @@ public class GroundSpawnerScript : MonoBehaviour
 
 
     [Header("Tuning")]
+    [SerializeField] float limitSpeed = 30f;
     [SerializeField] float chuncksSpeedMovement = 10f;
     [SerializeField] float minchuncksSpeedMovement = 2f;
     [SerializeField] float maxchuncksSpeedMovement = 35f;
@@ -52,17 +53,18 @@ public class GroundSpawnerScript : MonoBehaviour
     }
     public void ChangeSpeedOnCollision(float speed)
     {
-        chuncksSpeedMovement = Mathf.Clamp(chuncksSpeedMovement + speed, 
+        float protectedSpeed = Mathf.Clamp(speed, -limitSpeed, limitSpeed);
+        chuncksSpeedMovement = Mathf.Clamp(chuncksSpeedMovement + protectedSpeed, 
                                             minchuncksSpeedMovement, 
                                             maxchuncksSpeedMovement); 
 
-        float gravityPhysicsZ = Mathf.Clamp(physicsGravity.z - speed, 
+        float gravityPhysicsZ = Mathf.Clamp(physicsGravity.z - protectedSpeed, 
                                             minGravityVelocityZ, 
                                             maxGravityVelocityZ);
         physicsGravity = new Vector3(physicsGravity.x, physicsGravity.y, gravityPhysicsZ);
         Physics.gravity = physicsGravity;
 
-       cameraSettings.CameraZoomChangeFOV(speed);
+       cameraSettings.CameraZoomChangeFOV(protectedSpeed);
     }
     void ChunckMoving()
     {
