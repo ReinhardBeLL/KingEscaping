@@ -37,9 +37,14 @@ public class GameManager : MonoBehaviour
         if(currentTime <= 0f)
             PlayGameOver();
     }
+    public void AddTimerNumber(float num)
+    {
+        currentTime += num;
+
+    }
     void UpdateTextUI()
     {
-        timerText.text = Mathf.Max(currentTime, 0f).ToString();
+        timerText.text = Mathf.Max(currentTime, 0f).ToString("F0");
     }
     void PlayGameOver()
     {

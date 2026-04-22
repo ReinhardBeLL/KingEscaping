@@ -14,7 +14,7 @@ public class ObstacleSpawner : MonoBehaviour
         Vector3 pos = transform.position;
         int randomIndex = Random.Range(0, obstaclePrefab.Length);
         Instantiate(obstaclePrefab[randomIndex], 
-                    new Vector3(Random.Range(-randomPosX, randomPosX), pos.y, pos.z), 
+                    new Vector3(Random.Range(-randomPosX, randomPosX), pos.y, 95f), 
                     Random.rotation, 
                     obstacleParent);
     }

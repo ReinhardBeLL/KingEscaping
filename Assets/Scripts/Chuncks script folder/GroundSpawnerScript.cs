@@ -8,6 +8,7 @@ public class GroundSpawnerScript : MonoBehaviour
     [SerializeField] GameObject[] chunckPrefab;
     [SerializeField] GameObject chunckCheckPointPrefab;
     [SerializeField] ScoreManager scoreManager;
+    [SerializeField] GameManager gameManager;
     [SerializeField] Transform chunckParent;
 
 
@@ -105,7 +106,7 @@ public class GroundSpawnerScript : MonoBehaviour
             chunck = Instantiate(randomChuncks, pos, Quaternion.identity, chunckParent);
         }
         Chunck chunkScript = chunck.GetComponent<Chunck>();
-        chunkScript.Init(this, scoreManager);
+        chunkScript.Init(this, scoreManager, gameManager);
         spawningChunckAmount++;
 
         return chunck;

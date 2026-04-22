@@ -9,6 +9,7 @@ public class Chunck : MonoBehaviour
     [SerializeField] GameObject coinPrefab;
     GroundSpawnerScript gScript;
     ScoreManager scoreManager;
+    GameManager gameManager;
 
     [Header("Tuning")]
     [SerializeField] float chanceSpawnApple = .4f;
@@ -22,17 +23,28 @@ public class Chunck : MonoBehaviour
     [Header("Internal Config")]
     float chunckLenght = 5f;
     float seperationChunckLEnght = 2f;
+    public void Init(GroundSpawnerScript groundSpawnerScript, ScoreManager scoreManager, GameManager gameManager)
+    {
+        this.gameManager = gameManager;
+        this.gScript = groundSpawnerScript;
+        this.scoreManager = scoreManager;
+        ChunckCheckPoint();
+    }
+    void ChunckCheckPoint()
+    {
+        ChunckCheckPoint cp = GetComponent<ChunckCheckPoint>();
+
+        if(cp != null)
+        {
+            cp.Init(gameManager);
+        }
+    }
     void Start()
     {
         pos = transform.position;
         SpawnBarrier();
         SpawnApples();
         SpawnCoins();
-    }
-    public void Init(GroundSpawnerScript groundSpawnerScript, ScoreManager scoreManager)
-    {
-        this.gScript = groundSpawnerScript;
-        this.scoreManager = scoreManager;
     }
     void SpawnBarrier()
     {
