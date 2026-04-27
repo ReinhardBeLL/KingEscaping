@@ -242,8 +242,8 @@ MonoBehaviour:
   barrierPrefab: {fileID: 6368641454142374549, guid: 5e23ad081a223e842b2b3758e4d13a36, type: 3}
   applePrefab: {fileID: 7758042140168065422, guid: 6575dd1756c64254cb560f0f9f9eefd2, type: 3}
   coinPrefab: {fileID: 8242574765145494845, guid: 81e964780bf98da439fa89b9ac4394be, type: 3}
-  chanceSpawnApple: 0.4
-  chanceSpawnCoin: 0.6
+  chanceSpawnApple: 0.2
+  chanceSpawnCoin: 0.5
 --- !u!1001 &185609563596710962
 PrefabInstance:
   m_ObjectHideFlags: 0

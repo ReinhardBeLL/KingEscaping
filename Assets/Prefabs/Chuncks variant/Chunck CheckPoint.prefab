@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9143549623395944831}
   - component: {fileID: 8517022435049408805}
+  - component: {fileID: 9174387803062968852}
   m_Layer: 0
   m_Name: CheckPoint triggerZone
   m_TagString: Untagged
@@ -47,12 +48,24 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 12.677109, y: 4.9853606, z: 0.72102547}
   m_Center: {x: -0.05978012, y: 2.2517292, z: -0.13948727}
+--- !u!114 &9174387803062968852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3729797781214771901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8f0d6e7d3bd37846ac1417ddfe1bbb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChunckCheckPoint
 --- !u!1001 &2094028754176067650
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63,7 +76,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2146148155556199383, guid: cd797e60a584da14cb2205608368325a, type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5065337857098725761, guid: cd797e60a584da14cb2205608368325a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -130,10 +143,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 664057414394346789, guid: cd797e60a584da14cb2205608368325a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 856431552192558608}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8529664396092166049, guid: cd797e60a584da14cb2205608368325a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -8887445602050408440}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd797e60a584da14cb2205608368325a, type: 3}
 --- !u!4 &1456994458681619815 stripped
 Transform:
@@ -145,23 +155,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5065337857098725761, guid: cd797e60a584da14cb2205608368325a, type: 3}
   m_PrefabInstance: {fileID: 2094028754176067650}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7732690034159028195 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8529664396092166049, guid: cd797e60a584da14cb2205608368325a, type: 3}
-  m_PrefabInstance: {fileID: 2094028754176067650}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &-8887445602050408440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7732690034159028195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8f0d6e7d3bd37846ac1417ddfe1bbb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ChunckCheckPoint
 --- !u!1001 &2655613273672963546
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -170,6 +163,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1456994458681619815}
     m_Modifications:
+    - target: {fileID: 5532141579610619781, guid: c57ad1e69ca25e6438069c7a5200f235, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8200278115263290221, guid: c57ad1e69ca25e6438069c7a5200f235, type: 3}
       propertyPath: m_Name
       value: Beam_Bldg_01
@@ -244,6 +241,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1456994458681619815}
     m_Modifications:
+    - target: {fileID: 4302676382482900209, guid: 68a853dabcdaa3445ab666d8badab23f, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7454438417325230720, guid: 68a853dabcdaa3445ab666d8badab23f, type: 3}
       propertyPath: m_Name
       value: Flag_Prop
@@ -318,6 +319,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1456994458681619815}
     m_Modifications:
+    - target: {fileID: 5532141579610619781, guid: c57ad1e69ca25e6438069c7a5200f235, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8200278115263290221, guid: c57ad1e69ca25e6438069c7a5200f235, type: 3}
       propertyPath: m_Name
       value: Beam_Bldg_01 (1)
@@ -392,6 +397,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1456994458681619815}
     m_Modifications:
+    - target: {fileID: 4302676382482900209, guid: 68a853dabcdaa3445ab666d8badab23f, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7454438417325230720, guid: 68a853dabcdaa3445ab666d8badab23f, type: 3}
       propertyPath: m_Name
       value: Flag_Prop (1)

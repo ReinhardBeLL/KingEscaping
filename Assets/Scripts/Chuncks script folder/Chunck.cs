@@ -7,6 +7,7 @@ public class Chunck : MonoBehaviour
     [SerializeField] GameObject barrierPrefab;
     [SerializeField] GameObject applePrefab;
     [SerializeField] GameObject coinPrefab;
+    ChunckCheckPoint chunckCheckPoint;
     GroundSpawnerScript gScript;
     ScoreManager scoreManager;
     GameManager gameManager;
@@ -32,7 +33,7 @@ public class Chunck : MonoBehaviour
     }
     void ChunckCheckPoint()
     {
-        ChunckCheckPoint cp = GetComponent<ChunckCheckPoint>();
+        ChunckCheckPoint cp = GetComponentInChildren<ChunckCheckPoint>();
 
         if(cp != null)
         {
